@@ -8,12 +8,20 @@ std::string MusicClip::getArtist() {
   return artist;
 }
 
-Genre MusicClip::getGenre() {
+std::string MusicClip::getTitle() {
+  return title;
+}
+
+MusicClip::Genre MusicClip::getGenre() {
   return genre;
 }
 
 double MusicClip::getPrice() {
   return price;
+}
+
+std::vector<std::string> MusicClip::getPeople() {
+  return people;
 }
 
 int MusicClip::setId(int x) {
@@ -26,7 +34,12 @@ std::string MusicClip::setArtist(std::string x) {
   return artist;
 }
 
-Genre MusicClip::setGenre(Genre x) {
+std::string MusicClip::setTitle(std::string x) {
+  title = x;
+  return title;
+}
+
+MusicClip::Genre MusicClip::setGenre(Genre x) {
   genre = x;
   return genre;
 }
@@ -36,3 +49,7 @@ double MusicClip::setPrice(double x) {
   return price;
 }
 
+std::vector<std::string> MusicClip::setPeople(std::vector<std::string> x) {
+  people = x;
+  return people;
+}
