@@ -1,24 +1,40 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
+
 class MusicClip {
 
-  // enum Genre {  "POP MUSIC" = 1, "FOLK MUSIC", "JAZZ", "BLUES", "CLASSICAL", "OPERA", "COUNTRY MUSIC", "REGGAE", "ROCK" };
+  enum Genre {  POP_MUSIC,
+    FOLK_MUSIC,
+    JAZZ,
+    BLUES, 
+    CLASSICAL, 
+    OPERA, 
+    COUNTRY_MUSIC, 
+    REGGAE,
+    ROCK
+  };
+
+  private:
 
   /* Data Member declaration */
-  private: int id;
-  private: std::string artist;
-  private: std::string genre;
+  int id, index;
+  std::string artist, title;
+  std::vector<std::string> people;
+  Genre genre;
   // public** clip;
-  private: double price;
+  double price;
+
+  public:
 
   /* Getter methods */
-  public: int getId();
-  public: std::string getArtist();
-  public: std::string getGenre();
-  public: double getPrice();
+  int getId();
+  std::string getArtist();
+  Genre getGenre();
+  double getPrice();
 
   /* Setter Methods */
-  public: int setId(int);
-  public: std::string setArtist(std::string);
-  public: std::string setGenre(std::string);
-  public: double setPrice(double);
+  int setId(int);
+  std::string setArtist(std::string);
+  Genre setGenre(Genre);
+  double setPrice(double);
 };

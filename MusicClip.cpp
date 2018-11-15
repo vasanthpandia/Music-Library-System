@@ -8,7 +8,7 @@ std::string MusicClip::getArtist() {
   return artist;
 }
 
-std::string MusicClip::getGenre() {
+Genre MusicClip::getGenre() {
   return genre;
 }
 
@@ -26,7 +26,7 @@ std::string MusicClip::setArtist(std::string x) {
   return artist;
 }
 
-std::string MusicClip::setGenre(std::string x) {
+Genre MusicClip::setGenre(Genre x) {
   genre = x;
   return genre;
 }
