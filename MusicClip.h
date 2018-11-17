@@ -30,7 +30,7 @@ class MusicClip {
   int getId();
   std::string getArtist();
   std::string getTitle();
-  Genre getGenre();
+  int getGenre();
   double getPrice();
   std::vector<std::string> getPeople();
 
@@ -38,8 +38,9 @@ class MusicClip {
   /* Setter Methods */
   int setId(int);
   std::string setArtist(std::string);
-    std::string setTitle(std::string);
-  Genre setGenre(Genre);
+  std::string setTitle(std::string);
+  int setGenre(int);
   double setPrice(double);
   std::vector<std::string> setPeople(std::vector<std::string>);
+  void displayclip();
 };

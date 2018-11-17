@@ -1,21 +1,31 @@
 #include "MusicClip.h"
+#include<iostream>
+#include<fstream>
+#include<cstring>
+#include<sstream>
+#include<string>
 
 class MusicClipPtr {
 
-  //Public declarations.
-  public:
-  MusicClipPtr(int);
-  ~MusicClipPtr();
-  MusicClip* operator->() const;
-  MusicClip& operator*() const;
+  public:   //Public declarations.
+    MusicClipPtr(int);
+    ~MusicClipPtr();
+    MusicClip* operator->();
+    MusicClip& operator*();
 
-  protected:
-  int id;
-  MusicClip* mclip;
+    void saveToFile();
+    void loadFromFile();
+    void newClip();
+    char* filename();
+    void dispdetails();
 
-  MusicClipPtr(const MusicClipPtr&);
-  MusicClipPtr& operator=(const MusicClipPtr&);
+  private:  //Private declarations
+    int id; 
+    char * filestr; //Char array for the filename of the musicclip
+    MusicClip* mclip; //Instance of MusicClip 
 
-  std::string filename();
+    MusicClipPtr(const MusicClipPtr&);
+    MusicClipPtr& operator=(const MusicClipPtr&);
 
-}
+    static const char digits[];
+};
