@@ -21,7 +21,7 @@ class MusicClip {
   std::string artist, title;
   std::vector<std::string> people;
   Genre genre;
-  // public** clip;
+  std::string clip;
   double price;
 
   public:
@@ -33,6 +33,7 @@ class MusicClip {
   int getGenre();
   double getPrice();
   std::vector<std::string> getPeople();
+  std::string getClip();
 
 
   /* Setter Methods */
@@ -44,4 +45,6 @@ class MusicClip {
   std::vector<std::string> setPeople(std::string);
   void displayclip();
   std::vector<std::string> tokenisePeople(std::string);
+  void setClip(std::string);
+
 };

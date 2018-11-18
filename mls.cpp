@@ -2,10 +2,14 @@
 #include<stdio.h>
 #include "LinkedList.h"
 
-void listCommand(LinkedList& list);
+void listCommand(LinkedList&);
+void setCurrentClip(MusicClipPtr& clip, LinkedList& list, std::string str);
+void editPrice(MusicClipPtr& clip, std::string str);
+void commandMessage();
 void execCommands();
 
 void execCommands() {
+  /*Create 10 MusicClipPtr objects*/
   MusicClipPtr c0 = MusicClipPtr(0);
   MusicClipPtr c1 = MusicClipPtr(1);
   MusicClipPtr c2 = MusicClipPtr(2);
@@ -17,6 +21,7 @@ void execCommands() {
   MusicClipPtr c8 = MusicClipPtr(8);
   MusicClipPtr c9 = MusicClipPtr(9);
 
+  /*Create Nodes with MusicClipPtr for LinkedList*/
   Node n0 = Node(c0);
   Node n1 = Node(c1);
   Node n2 = Node(c2);
@@ -28,7 +33,7 @@ void execCommands() {
   Node n8 = Node(c8);
   Node n9 = Node(c9);
 
-
+  /*Initialize Linkedlist and push nodes*/
   LinkedList l = LinkedList();
   l.push(&n0);
   l.push(&n1);
@@ -41,25 +46,30 @@ void execCommands() {
   l.push(&n8);
   l.push(&n9);
 
-  std::vector<MusicClipPtr&> inMemoryClips;
-  inMemoryClips.reserve(3);
+  /*Vector of MusicClipPtr& for those that would be loaded in memory*/
+  // std::vector<MusicClipPtr&> inMemoryClips;
+  // inMemoryClips.reserve(3);
 
+  MusicClipPtr currentClip = l.getHead()->getClip();
 
   int input = 1;
   std::string inputstr;
 
   while(input == 1) {
+    commandMessage();
     std::cout << "Enter the command : ";
-    std::cin >> inputstr;
+    std::getline(std::cin, inputstr);
 
     switch(inputstr[0]) {
       case 'l': listCommand(l);
         break;
-      case 'e': break;
+      case 'e': setCurrentClip(currentClip, l, inputstr);
+        break;
       case 'c': break;
       case 'y': break;
       case 'i': break;
-      case 'p': break;
+      case 'p': editPrice(currentClip, inputstr);
+        break;
       case 's': break;
       case 'q': input = 0;
         break;
@@ -78,11 +88,41 @@ void listCommand(LinkedList& list) {
   }
 }
 
-int main() {
-  std::cout << "::: Welcome to Music Library System :::" << std::endl;
+void editPrice(MusicClipPtr& clip, std::string str) {
+  std::string price = str.substr(2);
+  std::stringstream ss(price);
+  double d;
+  ss >> d;
+
+  clip->setPrice(d);
+
+  std::cout << "Price of current clip changed to " << clip->getPrice();
+}
+
+void setCurrentClip(MusicClipPtr& clip, LinkedList& list, std::string str) {
+  char a = str[2];
+
+  int num = a - 48;
+
+  Node* node = list.getHead();
+
+  for(int i = 0; i < num; i++) {
+    node = node->getNext();
+  }
+  // clip
+  clip = node->getClip();
+
+  std::cout <<"Current clip changed to " << clip->getId() << std::endl;
+}
+
+void commandMessage() {
   std::cout << "Enter the commands in following formats " << std::endl;
   std::cout << "l to list all music clips" <<std::endl << "e <index> to edit the clip of index" << std::endl << "c to create a clip" << std::endl << "y to copy current clip to temp" << std::endl << "i to read commands from input file" << std::endl << "p to change price of the current clip" << std::endl << "s to save all clips" << std::endl << "q to quit MLS" << std::endl;
+}
 
+int main() {
+  std::cout << "::: Welcome to Music Library System :::" << std::endl;
+  
   execCommands();
   return 0;
 } 

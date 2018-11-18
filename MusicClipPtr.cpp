@@ -10,7 +10,9 @@ MusicClipPtr::MusicClipPtr() {
 }
 
 MusicClipPtr::~MusicClipPtr() {
-  // saveToFile();
+  if(mclip != NULL) {
+    saveToFile();
+  }
   delete mclip;
 }
 
@@ -47,7 +49,7 @@ void MusicClipPtr::loadFromFile() {
   std::string line;
 
   int c_index, c_id;
-  std::string c_artist, c_title, c_people;
+  std::string c_artist, c_title, c_people, c_clip;
   int c_genre;
   // // public** clip;
   double c_price;
@@ -76,6 +78,8 @@ void MusicClipPtr::loadFromFile() {
     std::stringstream v(line);
     v >> c_price; //clip price
 
+    getline(clipfile, c_clip); //clip
+
     mclip = new MusicClip();
     mclip->setId(c_id);
     mclip->setTitle(c_title);
@@ -83,6 +87,7 @@ void MusicClipPtr::loadFromFile() {
     mclip->setGenre(c_genre);
     mclip->setPrice(c_price);
     mclip->setPeople(c_people);
+    mclip->setClip(c_clip);
     clipfile.close();
   } else {
     std::cout <<"File not opened" << std::endl;
@@ -93,7 +98,12 @@ void MusicClipPtr::loadFromFile() {
 void MusicClipPtr::saveToFile() {
   std::ofstream clipfile;
   clipfile.open(filestr);
-  clipfile << mclip->getId() << std::endl << mclip->getTitle() << std::endl << mclip->getGenre() << std::endl << mclip->getArtist() << std::endl << mclip->getPrice() << std::endl;
+  clipfile << mclip->getId() << std::endl << mclip->getId() << std::endl << mclip->getTitle() << std::endl << mclip->getArtist()<< std::endl << mclip->getGenre() << std::endl;
+  std::vector<std::string> peeps = mclip->getPeople();
+  for(int i = 0; i < peeps.size(); i++) {
+    clipfile << peeps[i] << " ";
+  }
+  clipfile << std::endl << mclip->getPrice() << std::endl << mclip->getClip() << std::endl;
   clipfile.close();
 }
 

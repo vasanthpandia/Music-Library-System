@@ -54,6 +54,14 @@ std::vector<std::string> MusicClip::setPeople(std::string x) {
   return people;
 }
 
+std::string MusicClip::getClip() {
+  return clip;
+}
+
+void MusicClip::setClip(std::string cl) {
+  clip = cl;
+} 
+
 void MusicClip::displayclip() {
   std::cout<<"**********" <<std::endl;
   std::cout << id << std::endl << title  << std::endl << artist << std::endl << genre << std::endl;
