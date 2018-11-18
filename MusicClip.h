@@ -41,6 +41,7 @@ class MusicClip {
   std::string setTitle(std::string);
   int setGenre(int);
   double setPrice(double);
-  std::vector<std::string> setPeople(std::vector<std::string>);
+  std::vector<std::string> setPeople(std::string);
   void displayclip();
+  std::vector<std::string> tokenisePeople(std::string);
 };

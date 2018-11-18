@@ -9,12 +9,13 @@ class MusicClipPtr {
 
   public:   //Public declarations.
     MusicClipPtr(int);
+    MusicClipPtr();
     ~MusicClipPtr();
     MusicClip* operator->();
     MusicClip& operator*();
 
-    MusicClipPtr(const MusicClipPtr&);
-    MusicClipPtr& operator=(const MusicClipPtr&);
+    // MusicClipPtr(const MusicClipPtr&);
+    // MusicClipPtr& operator=(const MusicClipPtr&);
 
     void dispdetails();
 

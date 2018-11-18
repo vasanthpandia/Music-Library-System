@@ -49,13 +49,42 @@ double MusicClip::setPrice(double x) {
   return price;
 }
 
-std::vector<std::string> MusicClip::setPeople(std::vector<std::string> x) {
-  people = x;
+std::vector<std::string> MusicClip::setPeople(std::string x) {
+  people = tokenisePeople(x);
   return people;
 }
 
 void MusicClip::displayclip() {
   std::cout<<"**********" <<std::endl;
-  std::cout << id << std::endl << title  << std::endl << artist << std::endl << genre << std::endl << price << std::endl;
+  std::cout << id << std::endl << title  << std::endl << artist << std::endl << genre << std::endl;
+  for(int i = 0; i < people.size(); ++i) {
+    std::cout << people[i] << ",";
+  }
+  std::cout << std::endl << price << std::endl;
   std::cout<<"**********" <<std::endl;
+}
+
+std::vector<std::string> MusicClip::tokenisePeople(std::string s)
+{
+    std::vector<std::string> v;
+
+    std::string str;
+
+    for(int i = 0; i < s.length(); ++i)
+    {
+        if(s[i] != ',')
+        {
+            str += std::string(1, s[i]);
+        }
+        else if(s[i] == ',')
+        {
+            v.push_back(str);
+            str.clear();
+        }
+    }
+   
+    v.push_back(str);
+    str.clear();
+
+    return v;
 }

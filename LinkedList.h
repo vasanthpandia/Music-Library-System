@@ -2,5 +2,12 @@
 
 class LinkedList {
   public:
-    Node* head, tail;
+    // LinkedList();
+    void push(Node*);
+    Node* getHead();
+    Node* getTail();
+
+  private:
+    Node* head;
+    Node* tail;
 };

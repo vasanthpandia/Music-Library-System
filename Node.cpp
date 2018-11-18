@@ -1,11 +1,11 @@
 #include "Node.h"
 
-Node::Node(MusicClipPtr& index) {
-  clip = index;
+Node::Node(MusicClipPtr obj) {
+  clip = obj;
   next = NULL;
 }
 
-MusicClipPtr& Node::getClip() {
+MusicClipPtr Node::getClip() {
   return clip;
 }
 

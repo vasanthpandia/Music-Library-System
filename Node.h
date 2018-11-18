@@ -2,14 +2,12 @@
 
 class Node {
   public:
-    Node(MusicClipPtr&);
-    ~Node();
+    Node(MusicClipPtr);
     Node* getNext();
     void setNext(Node* newNext);
-    MusicClipPtr& getClip();
-    // void setClip(MusicClipPtr&);
+    MusicClipPtr getClip();
 
   private:
-    MusicClipPtr& clip;
+    MusicClipPtr clip;
     Node* next;
 };
