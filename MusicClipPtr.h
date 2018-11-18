@@ -13,10 +13,9 @@ class MusicClipPtr {
     MusicClip* operator->();
     MusicClip& operator*();
 
-    void saveToFile();
-    void loadFromFile();
-    void newClip();
-    char* filename();
+    MusicClipPtr(const MusicClipPtr&);
+    MusicClipPtr& operator=(const MusicClipPtr&);
+
     void dispdetails();
 
   private:  //Private declarations
@@ -24,8 +23,9 @@ class MusicClipPtr {
     char * filestr; //Char array for the filename of the musicclip
     MusicClip* mclip; //Instance of MusicClip 
 
-    MusicClipPtr(const MusicClipPtr&);
-    MusicClipPtr& operator=(const MusicClipPtr&);
+    void saveToFile();
+    void loadFromFile();
+    void newClip();
+    char* filename();
 
-    static const char digits[];
 };
