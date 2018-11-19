@@ -18,13 +18,15 @@ class MusicClipPtr {
     // MusicClipPtr& operator=(const MusicClipPtr&);
 
     void dispdetails();
+    void saveToFile();
+    void dcopy();
+    void createClip();
 
   private:  //Private declarations
     int id; 
     char * filestr; //Char array for the filename of the musicclip
     MusicClip* mclip; //Instance of MusicClip 
 
-    void saveToFile();
     void loadFromFile();
     void newClip();
     char* filename();

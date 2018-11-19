@@ -107,6 +107,56 @@ void MusicClipPtr::saveToFile() {
   clipfile.close();
 }
 
+void MusicClipPtr::dcopy() {
+  if(mclip == NULL) {
+    loadFromFile();
+  }
+
+  std::ofstream clipfile;
+  clipfile.open("temp.clip");
+  clipfile << mclip->getId() << std::endl << mclip->getId() << std::endl << mclip->getTitle() << std::endl << mclip->getArtist()<< std::endl << mclip->getGenre() << std::endl;
+  std::vector<std::string> peeps = mclip->getPeople();
+  for(int i = 0; i < peeps.size(); i++) {
+    clipfile << peeps[i] << " ";
+  }
+  clipfile << std::endl << mclip->getPrice() << std::endl << mclip->getClip() << std::endl;
+  clipfile.close();
+}
+
+void MusicClipPtr::createClip() {
+  std::string mc_title, mc_artist, mc_people, mc_clip;
+  int mc_genre, mc_id;
+  double mc_price;
+  mclip = NULL;
+  mc_id = id;
+  std::cout << std::endl << "Enter the clip title : ";
+  std::getline(std::cin, mc_title);
+  std::cout << std::endl << "Enter the Name of the artist : ";
+  std::getline(std::cin, mc_artist);
+  std::cout << std::endl << "Enter the name of the people associated as comma seperated values : ";
+  std::getline(std::cin, mc_people);
+  std::cout << std::endl << "Enter the genre of the song : ";
+  std::cin >> mc_genre;
+  std::cout << std::endl << "Enter the price of the song : ";
+  std::cin >> mc_price;
+  std::cout << std::endl <<"Enter or paste the contents for clip field : ";
+  std::cin.ignore();
+  std::getline(std::cin, mc_clip);
+
+  std::cout  << std::endl << "New clip is getting created" << std::endl;
+
+  mclip = new MusicClip();
+  mclip->setId(mc_id);
+  mclip->setTitle(mc_title);
+  mclip->setArtist(mc_artist);
+  mclip->setGenre(mc_genre);
+  mclip->setPrice(mc_price);
+  mclip->setPeople(mc_people);
+  mclip->setClip(mc_clip);
+
+  saveToFile();
+
+}
 
 void MusicClipPtr::dispdetails() {
   std::cout << "File Name is : " << filestr << std::endl << "Id is : " << id << std::endl;

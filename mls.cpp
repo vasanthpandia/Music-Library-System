@@ -5,6 +5,10 @@
 void listCommand(LinkedList&);
 void setCurrentClip(MusicClipPtr& clip, LinkedList& list, std::string str);
 void editPrice(MusicClipPtr& clip, std::string str);
+void createClip(MusicClipPtr& clip);
+void copyCurrentClip(MusicClipPtr& clip);
+void saveCurrentClip(MusicClipPtr& clip);
+// void execCommandFile(MusicClipPtr& clip, LinkedList& list);
 void commandMessage();
 void execCommands();
 
@@ -65,18 +69,75 @@ void execCommands() {
         break;
       case 'e': setCurrentClip(currentClip, l, inputstr);
         break;
-      case 'c': break;
-      case 'y': break;
-      case 'i': break;
+      case 'c': createClip(currentClip);
+        break;
+      case 'y': copyCurrentClip(currentClip);
+        break;
+      case 'i': {
+          std::ifstream cmdfile("input.inp");
+          std::string line;
+          std::vector<std::string> commands;
+
+          if(cmdfile.is_open()) {
+            while(std::getline(cmdfile, line)) {
+              commands.push_back(line);
+              line.clear();
+            }
+          }
+
+          for (int i = 0; i < commands.size(); i++) {
+            std::string command = commands[i];
+
+            std::cout << command << std::endl;
+
+            switch(command[0]) {
+              case 'l': listCommand(l);
+                break;
+              case 'e': setCurrentClip(currentClip, l, command);
+                break;
+              case 'c': createClip(currentClip);
+                break;
+              case 'y': copyCurrentClip(currentClip);
+                break;
+              case 'i': break;
+              case 'p': editPrice(currentClip, command);
+                break;
+              case 's': saveCurrentClip(currentClip);
+                break;
+              case 'q': input = 0;
+                break;
+              default: break;
+            }
+          }
+        }
+        break;
       case 'p': editPrice(currentClip, inputstr);
         break;
-      case 's': break;
+      case 's': saveCurrentClip(currentClip);
+        break;
       case 'q': input = 0;
         break;
       default: break;
     }
   }
 
+}
+
+void createClip(MusicClipPtr& clip) {
+  clip.createClip();
+}
+
+void saveCurrentClip(MusicClipPtr& clip) {
+  clip->displayclip();
+  clip.saveToFile();
+
+  std::cout << "Current Clips saved" << std::endl;
+}
+
+void copyCurrentClip(MusicClipPtr& clip) {
+  clip.dcopy();
+
+  std::cout << "Current Clip Copied to File temp.clip" << std::endl;
 }
 
 void listCommand(LinkedList& list) {
@@ -96,7 +157,7 @@ void editPrice(MusicClipPtr& clip, std::string str) {
 
   clip->setPrice(d);
 
-  std::cout << "Price of current clip changed to " << clip->getPrice();
+  std::cout << "Price of current clip changed to " << clip->getPrice() << std::endl;
 }
 
 void setCurrentClip(MusicClipPtr& clip, LinkedList& list, std::string str) {
